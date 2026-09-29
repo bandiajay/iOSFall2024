@@ -2,8 +2,6 @@
 //  ViewController.swift
 //  WordGuessApp
 //
-//  Created by Mahitha Vudutha on 2/13/25.
-//
 
 import UIKit
 
@@ -37,7 +35,7 @@ class ViewController: UIViewController {
         CheckButton.isEnabled = false;
         //Get the first word from the array
         word = words[count][0]
-                
+              
         DisplayLabel.text = ""
                 
         //Populate the display label with the underscores. The # of underscores is equal to the # of characters in the word.
@@ -55,6 +53,15 @@ class ViewController: UIViewController {
         //Get the text from the text field.
         var letter = letterEntered.text!
                 
+        
+        // Check if the letter is correct or incorrect
+        if word.contains(letter) {
+            statusLabel.text = " Correct "
+        } else {
+            statusLabel.text = "Try Again"
+        }
+        
+        
         //Replace the guessed letter if the letter is part of the word.
         lettersGuessed = lettersGuessed + letter
         var revealedWord = ""
@@ -74,6 +81,7 @@ class ViewController: UIViewController {
         if DisplayLabel.text!.contains("_") == false{
             PlayAgainButton.isHidden = false;
             CheckButton.isEnabled = false;
+            statusLabel.text! = "Well Done Play Again"
         }
         CheckButton.isEnabled = false
     }
@@ -82,6 +90,7 @@ class ViewController: UIViewController {
     @IBAction func PlayAgainButtonClicked(_ sender: UIButton) {
         //Reset the button to disable initially.
         PlayAgainButton.isHidden = true
+        statusLabel.text = " "
         //clear the label
         lettersGuessed = ""
         count += 1
@@ -92,6 +101,7 @@ class ViewController: UIViewController {
             //clearing the labels.
             DisplayLabel.text = ""
             HintLabel.text = ""
+            
         }
         else{
             //fetch the next word from the array
